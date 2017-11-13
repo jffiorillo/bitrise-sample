@@ -9,15 +9,16 @@ class StringCalculator {
 
   int sum(String valueString) {
     int sum = 0;
+    final List<Integer> negativeNumbers = extractNegativeNumbers(valueString);
+    if (negativeNumbers != null && !negativeNumbers.isEmpty()) {
+      throwExceptionWithNegativeNumbers(negativeNumbers);
+    }
+
     if (valueString != null && !valueString.isEmpty()) {
       final String[] split = valueString.split(separators);
       for (String a : split) {
         try {
           final Integer integer = Integer.valueOf(a);
-          if (integer < 0) {
-            final List<Integer> negativeNumbers = extractNegativeNumbers(valueString);
-            throwExceptionWithNegativeNumbers(negativeNumbers);
-          }
           sum += integer;
         } catch (NumberFormatException ignored) {
 
