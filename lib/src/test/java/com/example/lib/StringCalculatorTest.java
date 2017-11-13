@@ -1,11 +1,15 @@
 package com.example.lib;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 
 public class StringCalculatorTest {
+
+  @Rule public ExpectedException expectedException = ExpectedException.none();
 
   private StringCalculator stringCalculator;
 
@@ -29,7 +33,7 @@ public class StringCalculatorTest {
 
     final int sum = stringCalculator.sum(anyNumberOfArguments);
 
-    assertEquals(1,sum);
+    assertEquals(1, sum);
   }
 
   @Test
@@ -38,7 +42,7 @@ public class StringCalculatorTest {
 
     final int sum = stringCalculator.sum(anyNumberOfArguments);
 
-    assertEquals(6,sum);
+    assertEquals(6, sum);
   }
 
   @Test
@@ -47,6 +51,23 @@ public class StringCalculatorTest {
 
     final int sum = stringCalculator.sum(anyNumberOfArguments);
 
-    assertEquals(6,sum);
+    assertEquals(6, sum);
+  }
+
+  @Test(expected = NegativeNumberException.class)
+  public void shouldThrowExceptionWhenNegativeNumberProvided() throws Exception {
+    final String anyArgumentWithNegativeNumbers = "-1";
+
+    stringCalculator.sum(anyArgumentWithNegativeNumbers);
+  }
+
+  @Test(expected = NegativeNumberException.class)
+  public void shouldThrowExceptionWithMessageWhenNegativeNumberProvided() throws Exception {
+    final String anyArgumentWithNegativeNumbers = "-1,2,3,-4";
+
+    stringCalculator.sum(anyArgumentWithNegativeNumbers);
+
+    expectedException.expect(NegativeNumberException.class);
+    expectedException.expectMessage("-1,-4");
   }
 }
