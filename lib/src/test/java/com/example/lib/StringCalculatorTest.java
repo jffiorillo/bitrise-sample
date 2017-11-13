@@ -28,4 +28,12 @@ public class StringCalculatorTest {
 
     assertEquals(1,sum);
   }
+
+  @Test
+  public void shouldSumProvidedValues() throws Exception {
+    final String valueString = "1,2,3";
+    final int sum = stringCalculator.sum(valueString);
+
+    assertEquals(6,sum);
+  }
 }
