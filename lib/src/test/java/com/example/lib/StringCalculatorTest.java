@@ -16,23 +16,36 @@ public class StringCalculatorTest {
 
   @Test
   public void shouldReturn0WhenEmptyString() throws Exception {
-    final int sum = stringCalculator.sum("");
+    final String anyEmptyArgument = "";
+
+    final int sum = stringCalculator.sum(anyEmptyArgument);
 
     assertEquals(0, sum);
   }
 
   @Test
   public void shouldReturnNumberPassedAsParameter() throws Exception {
-    final String value = "1";
-    final int sum = stringCalculator.sum(value);
+    final String anyNumberOfArguments = "1";
+
+    final int sum = stringCalculator.sum(anyNumberOfArguments);
 
     assertEquals(1,sum);
   }
 
   @Test
   public void shouldSumProvidedValues() throws Exception {
-    final String valueString = "1,2,3";
-    final int sum = stringCalculator.sum(valueString);
+    final String anyNumberOfArguments = "1,2,3";
+
+    final int sum = stringCalculator.sum(anyNumberOfArguments);
+
+    assertEquals(6,sum);
+  }
+
+  @Test
+  public void shouldSumNewLinesAsCommas() throws Exception {
+    final String anyNumberOfArguments = "1\n2,3";
+
+    final int sum = stringCalculator.sum(anyNumberOfArguments);
 
     assertEquals(6,sum);
   }
