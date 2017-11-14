@@ -1,4 +1,4 @@
-package com.example.lib;
+package com.example.myapplication;
 
 public class NegativeNumberException extends RuntimeException {
 
